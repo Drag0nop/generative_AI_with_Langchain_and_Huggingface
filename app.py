@@ -18,3 +18,10 @@ chart_data = pd.DataFrame(
     columns=['a', 'b', 'c']
 )
 st.line_chart(chart_data)
+
+# Set the title of the app
+st.title("Streamlit Widgets Example")
+
+name = st.text_input("Enter some text:")
+if name:
+    st.write(f"You entered: {name}")
