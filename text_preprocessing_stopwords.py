@@ -47,7 +47,8 @@ from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 # Apply Stopwords and filter and then apply lemmatization
 for i in range(len(sentences)):
+    # sentences[i] = sentences[i].lower()  # Convert to lowercase
     words = nltk.word_tokenize(sentences[i])
-    words = [lemmatizer.lemmatize(word) for word in words if word not in set(stopwords.words('english'))]  # Apply stemming
+    words = [lemmatizer.lemmatize(word.lower(), pos='v') for word in words if word not in set(stopwords.words('english'))]  # Apply stemming
     sentences[i] = ' '.join(words) #convert all the list of words into sentence
 print(sentences)
