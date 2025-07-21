@@ -22,3 +22,32 @@ paragraph = """I have three visions for India. In 3000 years of our history, peo
                I was lucky to have worked with all three of them closely and consider this the great opportunity of my life. 
                I see four milestones in my career"""
 
+import nltk
+from nltk.corpus import stopwords
+
+nltk.download('stopwords')
+
+# print(stopwords.words('english')) # to see the list of stopwords
+
+# ======================================================================================
+
+from nltk.stem import PorterStemmer
+stemmer = PorterStemmer()
+sentences = nltk.sent_tokenize(paragraph)
+# Apply Stopwords and filter and then apply stemming
+for i in range(len(sentences)):
+    words = nltk.word_tokenize(sentences[i])
+    words = [stemmer.stem(word) for word in words if word not in set(stopwords.words('english'))]  # Apply stemming
+    sentences[i] = ' '.join(words) #convert all the list of words into sentence
+print(sentences)  # Print the processed sentences
+
+# ======================================================================================
+
+from nltk.stem import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
+# Apply Stopwords and filter and then apply lemmatization
+for i in range(len(sentences)):
+    words = nltk.word_tokenize(sentences[i])
+    words = [lemmatizer.lemmatize(word) for word in words if word not in set(stopwords.words('english'))]  # Apply stemming
+    sentences[i] = ' '.join(words) #convert all the list of words into sentence
+print(sentences)
