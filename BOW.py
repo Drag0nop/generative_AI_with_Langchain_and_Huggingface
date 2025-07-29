@@ -3,7 +3,7 @@ import numpy as np
 import re
 import nltk
 from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
+from nltk.stem.porter import PorterStemmer
 
 messages = pd.read_csv('file.csv', sep='\t',names=["label","message"])
 print(messages.head())
