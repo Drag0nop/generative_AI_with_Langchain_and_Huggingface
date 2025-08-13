@@ -1,47 +1,24 @@
-import pandas as pd
-import numpy as np
-import re
-import nltk
-from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
+from sklearn.feature_extraction.text import CountVectorizer
 
-# Download stopwords if not already downloaded
-nltk.download('stopwords')
+# Sample documents
+documents = [
+    "This is the first document.",
+    "This document is the second document.",
+    "And this is the third one.",
+    "Is this the first document?",
+]
 
-# Load dataset
-messages = pd.read_csv('file.csv', sep='\t', names=["label", "message"])
-print(messages.head())
+# Create a CountVectorizer object
+vectorizer = CountVectorizer()
 
-# Initialize stemmer and stopword list
-ps = PorterStemmer()
-stop_words = set(stopwords.words('english'))
+# Fit and transform the documents to a Bag-of-Words representation
+bow_matrix = vectorizer.fit_transform(documents)
 
-corpus = []
+# Get the feature names (words)
+feature_names = vectorizer.get_feature_names_out()
 
-for i in range(len(messages)):
-    message = messages['message'].iloc[i]
-    
-    # Decode if bytes
-    if isinstance(message, bytes):
-        try:
-            message = message.decode('utf-8')
-        except:
-            message = message.decode('latin1')
-
-    # Ensure it's a string
-    message = str(message)
-
-    # Clean text
-    review = re.sub('[^a-zA-Z]', ' ', message)     # Remove non-letters
-    review = review.lower()                        # Lowercase
-    review = review.split()                        # Tokenize
-
-    # Stemming and stopword removal
-    review = [ps.stem(word) for word in review if word not in stop_words]
-
-    # Join words back into a string
-    review = ' '.join(review)
-
-    # Add to corpus
-    corpus.append(review)
-print(corpus) 
+# Print the Bag-of-Words matrix and feature names
+print("Bag-of-Words Matrix:")
+print(bow_matrix.toarray())
+print("\nFeature Names:")
+print(feature_names)
