@@ -12,10 +12,6 @@ documents = [
 # Create a CountVectorizer object with n-gram range (1, 2) for unigrams and bigrams
 ngram_vectorizer = CountVectorizer(ngram_range=(1, 2))
 
-# for Binary BOW enable binary=True
-cv=CountVectorizer(max_features=100,binary=True,ngram_range=(2,3))
-X=cv.fit_transform(documents).toarray()
-
 # Fit and transform the documents
 ngram_matrix = ngram_vectorizer.fit_transform(documents)
 
