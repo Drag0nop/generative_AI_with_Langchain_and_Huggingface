@@ -1,4 +1,5 @@
 # Create the Bag OF Words model with ngram
+import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 
 # Sample documents
@@ -23,10 +24,9 @@ print("N-gram Matrix:")
 print(ngram_matrix.toarray())
 print("\nN-gram Feature Names:")
 print(n_feature)
-import pandas as pd
 
 # Create a pandas DataFrame
-ngram_df_preprocessed = pd.DataFrame(ngram_matrix_preprocessed.toarray(), columns=ngram_feature_names_preprocessed)
+ngram_table = pd.DataFrame(ngram_matrix.toarray(), columns=n_feature)
 
 # Display the DataFrame
-display(ngram_df_preprocessed)
+print(ngram_table)
