@@ -23,3 +23,10 @@ print("N-gram Matrix:")
 print(ngram_matrix.toarray())
 print("\nN-gram Feature Names:")
 print(n_feature)
+import pandas as pd
+
+# Create a pandas DataFrame
+ngram_df_preprocessed = pd.DataFrame(ngram_matrix_preprocessed.toarray(), columns=ngram_feature_names_preprocessed)
+
+# Display the DataFrame
+display(ngram_df_preprocessed)
